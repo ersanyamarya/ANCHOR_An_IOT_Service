@@ -1,16 +1,26 @@
 const mongoose = require('mongoose');
 
 const devicesSchema = mongoose.Schema({
-  node_type: {
+  user_key: {
     type: String,
     required: true
   },
+  metadata: {
+    type: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    cpu_metadata: {
+      type: JSON,
+      required: true
+    }
+  },
   fields: {
     type: Number,
-    required: true
-  },
-  dataForm: {
-    type: JSON,
     required: true
   },
   location: {
