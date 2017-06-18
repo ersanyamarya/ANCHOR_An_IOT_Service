@@ -1,0 +1,13 @@
+table(style='width:100%')
+  tr
+    th ID
+    th node_type
+    th location
+    th Created On
+  each value in details
+    
+    tr
+      th #{value.id} 
+      th #{value.node_type}
+      th #{value.location}
+      th #{value.create_date}

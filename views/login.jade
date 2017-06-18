@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/form.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/bootstrap.js')
+  
+  include ./includes/navbar.jade
+
+  body
+    .wrapper
+      form.form-signin(method='post', action='/users/login')
+        h2.form-signin-heading Please login
+        .form-group
+          label Username
+          input.form-control(type='text', name='username', placeholder='Username')
+        .form-group
+          label Password
+          input.form-control(type='password', name='password', placeholder='Password')
+        button.btn.btn-default(type='submit') Submit
+        hr
+        a(href='/users/register')
+          h5#center  Don't have an account ? 
+            br
+            | Register now . !
+    
+  .container          
+    include ./includes/footer.jade

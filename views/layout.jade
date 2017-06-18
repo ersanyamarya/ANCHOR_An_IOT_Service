@@ -1,0 +1,17 @@
+- var HOMEPAGE = false;
+block variables
+doctype html
+
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/bootstrap.js')
+
+  body
+    include ./includes/navbar.jade
+    include ./includes/showcase.jade
+    .container
+      block content
+      include ./includes/footer.jade

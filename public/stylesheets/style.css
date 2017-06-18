@@ -1,0 +1,142 @@
+.jumbotron {
+  color: #333333;
+  background-color: #f4d03f;
+}
+
+.btn.btn-primary.btn-lg {
+  background-color: #286090;
+}
+
+.btn.btn-default {
+  background-color: #286090;
+  color: white;
+}
+
+#tit {
+  padding: 5px;
+  color: #f4d03f;
+  background-color: #333333;
+}
+
+#navb {
+  margin-right: 10px;
+  color: #f4d03f;
+}
+
+#navb:hover {
+  background-color: #f4d03f;
+  color: #333333;
+}
+
+#middle {
+  background-color: #333333;
+}
+
+button {
+  width: 100%;
+  height: 50%;
+  background-color: #333333;
+}
+
+body {
+  color: #FFFFFF;
+  background-image: url('../images/bg2.jpg');
+}
+
+.about {
+  color: #FFFFFF !important;
+  background-color: transparent !important;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+#center {
+  text-align: center;
+  padding: 2px;
+}
+
+a:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: auto;
+  margin-left: 2%;
+}
+
+ul.sidenav {
+  background-color: #f4d03f;
+    padding: 5%;
+}
+
+li.navaa {
+  display: block;
+  color: #FFFFFF;
+  font-size: 110%;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li.sidenav {
+  color: #FFFFFF;
+  padding: 10% 10%;
+  text-decoration: none;
+}
+
+li.sidenav.active {
+  background-color: #333333;
+  color: white;
+  text-decoration: none;
+}
+a.sidenav{
+  font-size: 110%;
+  padding: 10% 10%;
+}
+
+li.sidenav:hover:not(.active) {
+  background-color: #FFFFFF;
+  color: black;
+
+}
+textarea{
+  color: black;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #f4d03f;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(1) {
+    color: #333333;
+    background-color: #f4d03f;
+}
+#columnusers{
+  padding: 3%;
+}
