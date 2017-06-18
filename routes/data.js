@@ -15,7 +15,7 @@ router.get('/:_id', (req, res) => {
   Data.getDataById(req.params._id, (err, data) => {
     if (err) {
       console.log("Some Error");
-      res.send(`This Data does not exist`);
+      res.send(`This Data does not exist - `);
     } else res.json(data);
   });
 });
