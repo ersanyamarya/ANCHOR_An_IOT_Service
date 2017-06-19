@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 
 Device = require('../models/devices');
 User = require('../models/user')
+  //--Remove This after testing--------------
 router.get('/', (req, res) => {
   Device.getDevice((err, device) => {
     if (err) {
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
     } else res.json(device);
   });
 });
-
+//------------------------------------------
 router.get('/:_user/:_id', (req, res) => {
   User.getUserById(req.params._user, (err, user) => {
     if (err) {
