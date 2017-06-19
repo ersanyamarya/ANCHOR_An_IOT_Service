@@ -23,8 +23,8 @@ const end_nodesSchema = mongoose.Schema({
 });
 const End_Nodes = module.exports = mongoose.model('End_Nodes', end_nodesSchema);
 
-module.exports.addEnd_Nodes = (device, callback) => {
-  End_Nodes.create(device, callback);
+module.exports.addEnd_Node = (end_node, callback) => {
+  End_Nodes.create(end_node, callback);
 }
 module.exports.getEnd_Nodes = (callback, limit) => {
   End_Nodes.find(callback).limit(limit);
@@ -50,17 +50,18 @@ module.exports.getEnd_NodesById = (id, callback) => {
   End_Nodes.findById(id, callback);
 }
 
-module.exports.updateEnd_Nodes = (id, device, options, callback) => {
+module.exports.updateEnd_Node = (id, end_node, options, callback) => {
   var query = {
     _id: id
   };
   var update = {
-    metadata: {
-      type: device.metadata.type,
-      name: device.metadata.name
-    },
-    location: device.location,
-    author: device.author
+    payload: {
+      field1: end_node.payload.field1,
+      field2: end_node.payload.field2,
+      field3: end_node.payload.field3,
+      field4: end_node.payload.field4,
+      field5: end_node.payload.field5
+    }
   }
   End_Nodes.findOneAndUpdate(query, update, options, callback);
 }
