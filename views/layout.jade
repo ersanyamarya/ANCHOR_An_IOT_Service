@@ -7,11 +7,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/form.css')
     script(src='/javascripts/bootstrap.js')
 
   body
-    include ./includes/navbar.jade
-    include ./includes/showcase.jade
+    if (title=='Home')
+      include ./includes/navbar.jade
+      include ./includes/showcase.jade
+    else if (title=='')
+      include ./includes/navbar.jade
+    else
+      include ./includes/navbaruser.jade
     .container
       block content
       include ./includes/footer.jade

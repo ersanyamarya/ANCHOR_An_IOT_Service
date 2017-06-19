@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const dataSchema = mongoose.Schema({
-  API_KEY: {
+  api_key: {
     type: String,
     required: true
   },

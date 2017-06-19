@@ -1,13 +1,15 @@
 table(style='width:100%')
   tr
     th ID
-    th node_type
+    th Gateway Type
+    th Gateway Name
     th location
     th Created On
+  
   each value in details
-    
     tr
       th #{value.id} 
-      th #{value.node_type}
+      th #{value.metadata.type}
+      th #{value.metadata.name}
       th #{value.location}
       th #{value.create_date}

@@ -1,22 +1,24 @@
-h2 Enter Device details
-.form-group
-  label Node Type
-  input.form-control(type='text', name='node_type', placeholder='Node')
-.form-group
-  label No of fields
-  input.form-control(type='text', name='fields', placeholder='Fields')
-.form-group
-  h5 Data Format
-  textarea(rows='5', cols='90', name='data_format', form='usrform', placeholder = 'Eg:- {"0": "temperature","1": "humidity"}')
-  | Enter JSON...
-.form-group
-  label Location
-  input.form-control(type='text', name='location', placeholder='Location')
-.form-group
-  label Author
-  input.form-control(type='text', name='author', value='#{name}')
-.form-group
-  label USER-KEY
-  input.form-control(type='text', name='user_key', value='#{apiKey}')
-    
-button.btn.btn-default(type='submit') Submit
+form(action="/users/addDevices" method="post")
+  h2 Enter Device details
+  hr
+  .form-group
+    label Gateway Type
+    input.form-control(type='text', name='gateway_type', placeholder='Gateway Type')
+  .form-group
+    label Gateway Name
+    input.form-control(type='text', name='gateway_name', placeholder='Gateway Name')
+  //- .form-group
+  //-   h5 Data Format
+  //-   textarea(rows='5', cols='90', name='data_format', form='usrform', placeholder = 'Eg:- {"0": "temperature","1": "humidity"}')
+  //-   | Enter JSON...
+  .form-group
+    label Location
+    input.form-control(type='text', name='location', placeholder='Location')
+  .form-group
+    label Author
+    input.form-control(type='text', name='author', value='#{name}')
+  .form-group
+    label USER-KEY
+    input.form-control(type='text', name='user_key', value='#{apiKey}')
+      
+  button.btn.btn-default(type='submit') Submit

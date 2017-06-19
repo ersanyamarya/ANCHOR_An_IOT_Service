@@ -1,15 +1,5 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/form.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascripts/bootstrap.js')
-  
-  include ./includes/navbar.jade
-
-  body
+extends layout
+block content
     .wrapper
       form.form-signin(method='post', action='/users/login')
         h2.form-signin-heading Please login
@@ -25,6 +15,3 @@ html
           h5#center  Don't have an account ? 
             br
             | Register now . !
-    
-  .container          
-    include ./includes/footer.jade

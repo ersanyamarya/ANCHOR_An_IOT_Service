@@ -4,7 +4,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 Device = require('../models/devices');
-Device = require('../models/devices');
 var User = require('../models/user');
 router.get('/', ensureAuthenticatedUser, function(req, res) {
   res.render('users', {
@@ -18,7 +17,7 @@ router.get('/', ensureAuthenticatedUser, function(req, res) {
 });
 
 router.get('/device', ensureAuthenticatedUser, function(req, res) {
-  Device.getDevice((err, device) => {
+  Device.getDeviceByUser(req.user.id, (err, device) => {
     if (err) {
       throw err;
     } else {
@@ -46,6 +45,36 @@ router.get('/addDevices', ensureAuthenticatedUser, function(req, res) {
   })
 });
 
+router.post('/addDevices', ensureAuthenticatedUser, function(req, res) {
+  var newDevice = new Device({
+    user_key: req.body.user_key,
+    metadata: {
+      type: req.body.gateway_type,
+      name: req.body.gateway_name
+    },
+    location: req.body.location,
+    author: req.body.author
+  });
+  if (!newDevice.metadata.type || !newDevice.metadata.name || !newDevice.location ||
+    !newDevice.author) {
+    res.send(`The data dosen't seems to be right....!`);
+  } else {
+    User.getUserById(newDevice.user_key, (err, user) => {
+      if (err) {
+        res.send('user not found');
+        console.error(err);
+      } else {
+        Device.addDevice(newDevice, (err, device) => {
+          if (err) console.error(err);
+          res.send("Your API-KEY is: " + device.id +
+            "\nKeep this safe, it will be used to receive and send data on your device\nOwned by: " +
+            device.author
+          );
+        });
+      }
+    });
+  }
+});
 // Register
 router.get('/register', ensureAuthenticated, function(req, res) {
   res.render('register');

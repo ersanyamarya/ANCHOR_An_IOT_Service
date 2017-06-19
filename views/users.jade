@@ -1,13 +1,6 @@
-
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascripts/bootstrap.js')
+extends layout
+block content
   
-  include ./includes/navbaruser.jade
 
   body
     .container
@@ -23,6 +16,3 @@ html
               include ./dashboard/devices.jade
             if(title == 'AddDevices')
               include ./dashboard/addDevices.jade
-            
-    .container   
-      include ./includes/footer.jade

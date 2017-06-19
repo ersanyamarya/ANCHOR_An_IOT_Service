@@ -13,15 +13,7 @@ const devicesSchema = mongoose.Schema({
     name: {
       type: String,
       required: true
-    },
-    cpu_metadata: {
-      type: JSON,
-      required: true
     }
-  },
-  fields: {
-    type: Number,
-    required: true
   },
   location: {
     type: String,
@@ -43,6 +35,17 @@ module.exports.addDevice = (device, callback) => {
 }
 module.exports.getDevice = (callback, limit) => {
   Device.find(callback).limit(limit);
+}
+module.exports.getDeviceByUser = (user, callback) => {
+  Device.find({
+    user_key: user
+  }, callback);
+}
+module.exports.getDeviceByUserAndId = (user, id, callback) => {
+  Device.find({
+    user_key: user,
+    _id: id
+  }, callback);
 }
 module.exports.getDeviceById = (id, callback) => {
   Device.findById(id, callback);

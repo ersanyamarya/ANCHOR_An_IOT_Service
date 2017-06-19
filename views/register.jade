@@ -1,15 +1,5 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/form.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascripts/bootstrap.js')
-
-  include ./includes/navbar.jade
-
-  body
+extends layout
+block content
     .wrapper
 
         if errors
@@ -35,6 +25,3 @@ html
             label Confirm Password
             input.form-control(type='password', placeholder='Password', name='password2')
           button.btn.btn-default(type='submit') Submit
-
-  .container          
-    include ./includes/footer.jade
