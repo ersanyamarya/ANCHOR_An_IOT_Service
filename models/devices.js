@@ -50,3 +50,26 @@ module.exports.getDeviceByUserAndId = (user, id, callback) => {
 module.exports.getDeviceById = (id, callback) => {
   Device.findById(id, callback);
 }
+
+module.exports.updateDevice = (id, device, options, callback) => {
+  var query = {
+    _id: id
+  };
+  var update = {
+    metadata: {
+      type: device.metadata.type,
+      name: device.metadata.name
+    },
+    location: device.location,
+    author: device.author
+  }
+  Device.findOneAndUpdate(query, update, options, callback);
+}
+
+// Delete Book
+module.exports.removeDevice = (id, callback) => {
+  var query = {
+    _id: id
+  };
+  Device.remove(query, callback);
+}

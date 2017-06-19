@@ -73,7 +73,8 @@ router.post('/', (req, res) => {
 router.put('/:_id', (req, res) => {
   var id = req.params._id;
   var device = req.body;
-  if (!device.sensor_type || !device.location || !device.author) {
+  if (!device.metadata.type || !device.metadata.name || !device.author || !
+    device.location) {
     res.send(`The data dosen't seems to be right....!`);
   } else {
     Device.updateDevice(id, device, {}, (err, device) => {
