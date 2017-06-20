@@ -69,7 +69,8 @@ router.get('/a/:_user/:_device', (req, res) => {
 
 router.post('/', (req, res) => {
   var end_node = req.body;
-  if (!end_node.user_key || !end_node.device_key) {
+  if (!end_node.user_key || !end_node.device_key || !end_node.metadata.end_node_type ||
+    !end_node.metadata.end_node_name) {
     res.send(`The data dosen't seems to be right....!`);
   } else {
     User.getUserById(end_node.user_key, (err, user) => {

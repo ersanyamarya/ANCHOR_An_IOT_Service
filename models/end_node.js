@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const end_nodesSchema = mongoose.Schema({
+  metadata: {
+    end_node_name: String,
+    end_node_type: String
+  },
   user_key: {
     type: String,
     required: true
@@ -16,6 +20,7 @@ const end_nodesSchema = mongoose.Schema({
     field4: String,
     field5: String
   },
+
   create_date: {
     type: Date,
     default: Date.now
@@ -44,6 +49,11 @@ module.exports.getEnd_NodesByUserAndDevice = (user, device, callback) => {
   End_Nodes.find({
     user_key: user,
     device_key: device
+  }, callback);
+}
+module.exports.getEnd_NodesByDevice = (device, callback) => {
+  End_Nodes.find({
+    device_key: device,
   }, callback);
 }
 module.exports.getEnd_NodesById = (id, callback) => {

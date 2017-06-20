@@ -4,6 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 Device = require('../models/devices');
+End_Node = require('../models/end_node');
 var User = require('../models/user');
 router.get('/', ensureAuthenticatedUser, function(req, res) {
   res.render('users', {
@@ -30,9 +31,20 @@ router.get('/device', ensureAuthenticatedUser, function(req, res) {
         details: device
       });
     }
-
   });
+});
 
+router.get('/device/end_nodes/:_device', function(req, res) {
+  End_Node.getEnd_NodesByDevice(req.params._device, (err, end_nodes) => {
+    if (err) {
+      throw err;
+    } else {
+      res.render('users', {
+        title: 'End_Nodes',
+        details: end_nodes
+      });
+    }
+  });
 });
 
 router.get('/addDevices', ensureAuthenticatedUser, function(req, res) {

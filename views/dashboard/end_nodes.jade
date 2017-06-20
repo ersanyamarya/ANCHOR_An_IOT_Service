@@ -1,0 +1,24 @@
+h3 End - Nodes 
+hr
+table(style='width:100%')
+  tr
+    th ID
+    th Type
+    th Name
+    th Payload
+    th Created On
+  
+    each value in details
+      tr
+        th #{value.id}
+        th #{value.metadata.end_node_type}
+        th #{value.metadata.end_node_name}
+        th 
+          ul
+            li #{value.payload.field1}
+            li #{value.payload.field2}
+            li #{value.payload.field3}
+            li #{value.payload.field4}
+            li #{value.payload.field5}
+        th #{value.create_date}
+hr
