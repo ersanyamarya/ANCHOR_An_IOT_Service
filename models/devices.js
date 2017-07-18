@@ -66,7 +66,6 @@ module.exports.updateDevice = (id, device, options, callback) => {
   Device.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete Book
 module.exports.removeDevice = (id, callback) => {
   var query = {
     _id: id
