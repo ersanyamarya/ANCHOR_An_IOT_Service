@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 const dataSchema = mongoose.Schema({
-  api_key: {
+  device_key: {
     type: String,
     required: true
   },
-  actData: {
-    type: JSON,
-    required: true
+  payload: {
+    field1,
+    field2,
+    field3,
+    field4,
+    field5
   },
   create_date: {
     type: Date,
