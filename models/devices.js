@@ -41,12 +41,7 @@ module.exports.getDeviceByUser = (user, callback) => {
     user_key: user
   }, callback);
 }
-module.exports.getDeviceByUserAndId = (user, id, callback) => {
-  Device.find({
-    user_key: user,
-    _id: id
-  }, callback);
-}
+
 module.exports.getDeviceById = (id, callback) => {
   Device.findById(id, callback);
 }

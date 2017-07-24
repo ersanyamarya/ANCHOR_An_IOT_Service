@@ -3,8 +3,8 @@ hr
 table(style='width:100%')
   tr
     th ID
-    th Gateway Type
     th Gateway Name
+    th Gateway Type
     th location
     th Created On
   
@@ -12,7 +12,7 @@ table(style='width:100%')
     tr
       th
         a(href='/users/device/end_nodes/#{value.id}') #{value.id}
-      th #{value.metadata.type}
       th #{value.metadata.name}
+      th #{value.metadata.type}
       th #{value.location}
       th #{value.create_date}

@@ -12,26 +12,19 @@ router.get('/', (req, res) => {
     } else res.json(device);
   });
 });
-//------------------------------------------
-router.get('/:_user/:_id', (req, res) => {
-  User.getUserById(req.params._user, (err, user) => {
+//---------------------------------------------
+router.get('/:_id', (req, res) => {
+  Device.getDeviceById(req.params._id, (
+    err,
+    device) => {
     if (err) {
-      res.send('user not found');
-      console.error(err);
-    } else {
-      Device.getDeviceByUserAndId(req.params._user, req.params._id, (
-        err,
-        device) => {
-        if (err) {
-          console.log("Some Error");
-          res.send('Device Not found');
-        } else res.json(device);
-      });
-    }
+      console.log("Some Error");
+      res.send('Device Not found');
+    } else res.json(device);
   });
 });
 
-router.get('/:_user', (req, res) => {
+router.get('/byuser/:_user', (req, res) => {
   User.getUserById(req.params._user, (err, user) => {
     if (err) {
       res.send('user not found');
@@ -51,7 +44,7 @@ router.get('/:_user', (req, res) => {
 router.post('/', (req, res) => {
   var device = req.body;
   if (!device.metadata.type || !device.metadata.name || !device.location ||
-    !device.author) {
+    !device.author || !device.user_key) {
     res.send(`The data dosen't seems to be right....!`);
   } else {
     User.getUserById(device.user_key, (err, user) => {

@@ -34,7 +34,8 @@ router.get('/device', ensureAuthenticatedUser, function(req, res) {
   });
 });
 
-router.get('/device/end_nodes/:_device', function(req, res) {
+router.get('/device/end_nodes/:_device', ensureAuthenticatedUser, function(req,
+  res) {
   End_Node.getEnd_NodesByDevice(req.params._device, (err, end_nodes) => {
     if (err) {
       throw err;
@@ -46,6 +47,20 @@ router.get('/device/end_nodes/:_device', function(req, res) {
     }
   });
 });
+// router.get('/device/end_nodes/data/:_device', ensureAuthenticatedUser, function(
+//   req,
+//   res) {
+//   End_Node.getEnd_NodesByDevice(req.params._device, (err, end_nodes) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       res.render('users', {
+//         title: 'End_Nodes',
+//         details: end_nodes
+//       });
+//     }
+//   });
+// });
 
 router.get('/addDevices', ensureAuthenticatedUser, function(req, res) {
   res.render('users', {

@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
-
 const end_nodesSchema = mongoose.Schema({
   metadata: {
-    end_node_name: String,
-    end_node_type: String
+    end_node_name: {
+      type: String,
+      required: true
+    },
+    end_node_type: {
+      type: String,
+      required: true
+    }
   },
   user_key: {
     type: String,
@@ -39,24 +44,13 @@ module.exports.getEnd_NodesByUser = (user, callback) => {
     user_key: user
   }, callback);
 }
-module.exports.getEnd_NodesByUserAndId = (user, id, callback) => {
-  End_Nodes.find({
-    user_key: user,
-    _id: id
-  }, callback);
-}
-module.exports.getEnd_NodesByUserAndDevice = (user, device, callback) => {
-  End_Nodes.find({
-    user_key: user,
-    device_key: device
-  }, callback);
-}
+
 module.exports.getEnd_NodesByDevice = (device, callback) => {
   End_Nodes.find({
     device_key: device,
   }, callback);
 }
-module.exports.getEnd_NodesById = (id, callback) => {
+module.exports.getEnd_NodeById = (id, callback) => {
   End_Nodes.findById(id, callback);
 }
 
@@ -75,8 +69,6 @@ module.exports.updateEnd_Node = (id, end_node, options, callback) => {
   }
   End_Nodes.findOneAndUpdate(query, update, options, callback);
 }
-
-// Delete Book
 module.exports.removeEnd_Nodes = (id, callback) => {
   var query = {
     _id: id

@@ -13,58 +13,34 @@ router.get('/', (req, res) => {
     } else res.json(end_node);
   });
 });
-//---------------------------------------------
-router.get('/:_user/:_id', (req, res) => {
-  User.getUserById(req.params._user, (err, user) => {
-    if (err) {
-      res.send('user not found');
-      console.error(err);
-    } else {
-      End_Node.getEnd_NodesByUserAndId(req.params._user, req.params._id, (
-        err,
-        device) => {
-        if (err) {
-          console.log("Some Error");
-          res.send('End_Node Not found');
-        } else res.json(device);
-      });
-    }
-  });
-});
 
-router.get('/:_user', (req, res) => {
-  User.getUserById(req.params._user, (err, user) => {
+router.get('/:_id', (req, res) => {
+  End_Node.getEnd_NodeById(req.params._id, (
+    err,
+    device) => {
     if (err) {
-      res.send('user not found');
-      console.error(err);
-    } else {
-      End_Node.getEnd_NodesByUser(req.params._user, (err, end_node) => {
-        if (err) {
-          console.log("Some Error");
-          res.send('End_Node Not found');
-        } else res.json(end_node);
-      });
-    }
+      console.log("Some Error");
+      res.send('End_Node Not found');
+    } else res.json(device);
   });
 
 });
-
-router.get('/a/:_user/:_device', (req, res) => {
-  User.getUserById(req.params._user, (err, user) => {
+router.get('/byuser/:_user', (req, res) => {
+  End_Node.getEnd_NodesByUser(req.params._user, (err, end_node) => {
     if (err) {
-      res.send('user not found');
-      console.error(err);
-    } else {
-      End_Node.getEnd_NodesByUserAndDevice(req.params._user, req.params
-        ._device, (err, end_node) => {
-          if (err) {
-            console.log("Some Error");
-            res.send('Device Not found');
-          } else res.json(end_node);
-        });
-    }
+      console.log("Some Error");
+      res.send('End_Node Not found');
+    } else res.json(end_node);
   });
+});
 
+router.get('/bydevice/:_device', (req, res) => {
+  End_Node.getEnd_NodesByDevice(req.params._device, (err, end_node) => {
+    if (err) {
+      console.log("Some Error");
+      res.send('Device Not found');
+    } else res.json(end_node);
+  });
 });
 
 router.post('/', (req, res) => {

@@ -3,16 +3,16 @@ hr
 table(style='width:100%')
   tr
     th ID
-    th Type
     th Name
+    th Type
     th Payload
     th Created On
   
     each value in details
       tr
         th #{value.id}
-        th #{value.metadata.end_node_type}
         th #{value.metadata.end_node_name}
+        th #{value.metadata.end_node_type}
         th 
           ul
             li #{value.payload.field1}
