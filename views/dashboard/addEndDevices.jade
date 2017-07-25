@@ -1,0 +1,32 @@
+form(action="/users/addEndDevices" method="post")
+  h2 Enter Device details
+  hr
+  .form-group
+    label Node Type
+    input.form-control(type='text', name='node_type', placeholder='Node Type')
+  .form-group
+    label Node Name
+    input.form-control(type='text', name='node_name', placeholder='Node Name')
+  .form-group
+    label field1
+    input.form-control(type='text', name='field_1', placeholder='field1')    
+  .form-group
+      label field2
+      input.form-control(type='text', name='field_2', placeholder='field2')    
+  .form-group
+      label field3
+      input.form-control(type='text', name='field_3', placeholder='field3')    
+  .form-group
+      label field4
+      input.form-control(type='text', name='field_4', placeholder='field4')    
+  .form-group
+      label field5
+      input.form-control(type='text', name='field_5', placeholder='field5')    
+  .form-group
+      label Device-Key
+      input.form-control(type='text', name='device_Key', placeholder='Location', value='#{deviceKey}')
+  .form-group
+    label USER-KEY
+    input.form-control(type='text', name='user_key', value='#{apiKey}')
+      
+  button.btn.btn-default(type='submit') Submit

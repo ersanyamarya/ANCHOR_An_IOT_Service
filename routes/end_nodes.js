@@ -45,27 +45,22 @@ router.get('/bydevice/:_device', (req, res) => {
 
 router.post('/', (req, res) => {
   var end_node = req.body;
-  if (!end_node.user_key || !end_node.device_key || !end_node.metadata.end_node_type ||
+  if (!end_node.device_key || !end_node.metadata.end_node_type ||
     !end_node.metadata.end_node_name) {
     res.send(`The data dosen't seems to be right....!`);
   } else {
-    User.getUserById(end_node.user_key, (err, user) => {
+    Device.getDeviceById(end_node.device_key, (err, device) => {
       if (err) {
-        res.send('user not found');
-        console.error(err);
+        res.send('device not found');
+        console.log(err);
       } else {
-        Device.getDeviceById(end_node.device_key, (err, device) => {
-          if (err) {
-            res.send('device not found');
-            console.log(err);
-          } else {
-            End_Node.addEnd_Node(end_node, (err, end_node) => {
-              if (err) console.error(err);
-              res.send("Your API-KEY is: " + end_node.id +
-                "\nKeep this safe, it will be used to receive and send data on your end_node"
-              );
-            });
-          }
+        end_node.user_key = device.user_key;
+        End_Node.addEnd_Node(end_node, (err, end_node) => {
+          if (err) console.error(err);
+          res.send("Your EndNode-KEY is: " + end_node.id +
+            "\nKeep this safe, it will be used to receive and send data on your end_node\nOwned by: " +
+            device.author
+          );
         });
       }
     });

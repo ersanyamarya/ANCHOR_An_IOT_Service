@@ -4,14 +4,24 @@ const dataSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  device_key: {
-    type: String,
-    required: true
-  },
   user_key: {
     type: String,
     required: true
   },
+  device_key: {
+    type: String,
+    required: true
+  },
+
+  gateway_name: {
+    type: String,
+    required: true
+  },
+  gateway_type: {
+    type: String,
+    required: true
+  },
+
   payload: {
     field1: String,
     field2: String,

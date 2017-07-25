@@ -1,4 +1,6 @@
 h3 End - Nodes 
+a(href='/users/addEndDevices/') 
+  button.btn.btn-default Add new
 hr
 table(style='width:100%')
   tr
@@ -10,7 +12,8 @@ table(style='width:100%')
   
     each value in details
       tr
-        th #{value.id}
+        th 
+          a(href='/users/device/end_nodes/data/#{value.id}') #{value.id}
         th #{value.metadata.end_node_name}
         th #{value.metadata.end_node_type}
         th 

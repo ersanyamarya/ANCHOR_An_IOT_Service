@@ -1,0 +1,25 @@
+h3 Data
+h5 End Node Name : #{meta.metadata.end_node_name}  
+h5 End Node Type : #{meta.metadata.end_node_type} 
+h5 Created On: #{meta.create_date}
+hr
+table(style='width:100%')
+  tr
+    th ID
+    th #{meta.payload.field1}
+    th #{meta.payload.field2}
+    th #{meta.payload.field3}
+    th #{meta.payload.field4}
+    th #{meta.payload.field5}
+    th Created On
+  
+    each value in details
+      tr
+        th #{value.id}
+        th #{value.payload.field1}
+        th #{value.payload.field2}
+        th #{value.payload.field3}
+        th #{value.payload.field4} 
+        th #{value.payload.field5}
+        th #{value.create_date}
+hr

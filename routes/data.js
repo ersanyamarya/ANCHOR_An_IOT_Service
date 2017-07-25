@@ -35,14 +35,34 @@ router.get('/byendnode/:_endnode', (req, res) => {
 
 router.post('/', (req, res) => {
   var data = req.body;
-  if (!data.end_node_key || !data.device_key || !data.user_key || !data.payload) {
+  if (!data.end_node_key || !data.payload) {
     res.send(`The data dosen't seems to be right....!`);
   } else {
-    Data.addData(data, (err, data) => {
+    End_Node.getEnd_NodeById(data.end_node_key, (err, end_node) => {
       if (err) {
-        console.error(err);
+        console.log("Some Error");
+        res.send('End_Node Not found');
+      } else {
+        data.device_key = end_node.device_key;
+        data.user_key = end_node.user_key;
+        Device.getDeviceById(data.device_key, (err, device) => {
+          if (err) {
+            console.log("Some Error");
+            res.send('End_Node Not found');
+          } else {
+            data.gateway_name = device.author;
+            data.gateway_type = device.metadata.type;
+            Data.addData(data, (err, data) => {
+              if (err) {
+                console.error(err);
+              }
+              res.send("Data received sucessfully....!\n");
+            });
+
+          }
+        });
+
       }
-      res.send("Data received sucessfully....!\n");
     });
   }
 });

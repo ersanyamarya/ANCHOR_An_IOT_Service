@@ -6,6 +6,8 @@ var LocalStrategy = require('passport-local').Strategy;
 Device = require('../models/devices');
 End_Node = require('../models/end_node');
 var User = require('../models/user');
+Data = require('../models/data');
+var deviceinuse = new Device;
 router.get('/', ensureAuthenticatedUser, function(req, res) {
   res.render('users', {
     title: 'Profile',
@@ -36,6 +38,9 @@ router.get('/device', ensureAuthenticatedUser, function(req, res) {
 
 router.get('/device/end_nodes/:_device', ensureAuthenticatedUser, function(req,
   res) {
+  Device.getDeviceById(req.params._device, (err, device) => {
+    deviceinuse = device;
+  });
   End_Node.getEnd_NodesByDevice(req.params._device, (err, end_nodes) => {
     if (err) {
       throw err;
@@ -47,20 +52,26 @@ router.get('/device/end_nodes/:_device', ensureAuthenticatedUser, function(req,
     }
   });
 });
-// router.get('/device/end_nodes/data/:_device', ensureAuthenticatedUser, function(
-//   req,
-//   res) {
-//   End_Node.getEnd_NodesByDevice(req.params._device, (err, end_nodes) => {
-//     if (err) {
-//       throw err;
-//     } else {
-//       res.render('users', {
-//         title: 'End_Nodes',
-//         details: end_nodes
-//       });
-//     }
-//   });
-// });
+router.get('/device/end_nodes/data/:_end_node', ensureAuthenticatedUser,
+  function(req, res) {
+    End_Node.getEnd_NodeById(req.params._end_node, (err, end_node) => {
+      if (err) {
+        throw err
+      } else {
+        Data.getDataByEndNode(req.params._end_node, (err, data) => {
+          if (err) {
+            throw err;
+          } else {
+            res.render('users', {
+              title: 'Data',
+              meta: end_node,
+              details: data
+            });
+          }
+        });
+      }
+    });
+  });
 
 router.get('/addDevices', ensureAuthenticatedUser, function(req, res) {
   res.render('users', {
@@ -68,6 +79,14 @@ router.get('/addDevices', ensureAuthenticatedUser, function(req, res) {
     name: req.user.name,
     email: req.user.email,
     username: req.user.username,
+    apiKey: req.user.id
+  })
+});
+router.get('/addEndDevices', ensureAuthenticatedUser, function(req, res) {
+  res.render('users', {
+    title: 'AddEndDevices',
+    deviceKey: deviceinuse.id,
+    name: req.user.name,
     apiKey: req.user.id
   })
 });
@@ -95,6 +114,44 @@ router.post('/addDevices', ensureAuthenticatedUser, function(req, res) {
           if (err) console.error(err);
           res.send("Your API-KEY is: " + device.id +
             "\nKeep this safe, it will be used to receive and send data on your device\nOwned by: " +
+            device.author
+          );
+        });
+      }
+    });
+  }
+});
+router.post('/addEndDevices', ensureAuthenticatedUser, function(req, res) {
+  var newNode = new End_Node({
+    user_key: 'nil',
+    device_key: req.body.device_Key,
+    metadata: {
+      end_node_type: req.body.node_type,
+      end_node_name: req.body.node_name
+    },
+    payload: {
+      field1: req.body.field_1,
+      field2: req.body.field_2,
+      field3: req.body.field_3,
+      field4: req.body.field_4,
+      field5: req.body.field_5
+    }
+  });
+  console.log(newNode);
+  if (!newNode.metadata.end_node_type || !newNode.metadata.end_node_name ||
+    !newNode.payload) {
+    res.send(`The data dosen't seems to be right....!`);
+  } else {
+    Device.getDeviceById(newNode.device_key, (err, device) => {
+      if (err) {
+        res.send('device not found');
+        console.log(err);
+      } else {
+        newNode.user_key = device.user_key;
+        End_Node.addEnd_Node(newNode, (err, end_node) => {
+          if (err) console.error(err);
+          res.send("Your EndNode-KEY is: " + newNode.id +
+            "\nKeep this safe, it will be used to receive and send data on your end_node\nowned by " +
             device.author
           );
         });
@@ -145,7 +202,8 @@ router.post('/register', function(req, res) {
   req.checkBody('email', 'Email is not valid').isEmail();
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+  req.checkBody('password2', 'Passwords do not match').equals(req.body
+    .password);
 
   var errors = req.validationErrors();
 
@@ -182,7 +240,8 @@ passport.use(new LocalStrategy(
         });
       }
 
-      User.comparePassword(password, user.password, function(err,
+      User.comparePassword(password, user.password, function(
+        err,
         isMatch) {
         if (err) throw err;
         if (isMatch) {
